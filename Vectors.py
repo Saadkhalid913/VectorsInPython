@@ -1,12 +1,23 @@
+'''
+2 dimentional Vector class by Saadkhalid913
+'''
+
 import numpy as np
 import matplotlib.pyplot as plt 
 import math
+
+__all__ = ["Vector"]
 
 # CONSTANTS 
 pi = math.pi
 
 class Vector(object):
+    '''
+    Vector class with instance attributes x, y, x-component, y-component, Magnitude, Theta - Terminal angle of vector in radians
 
+    - Supports +, -, +=, -=, == operators 
+    - Class attribute "scale" serves as scale for plotting vectors
+    '''
     scale = 100 
 
     def __init__(self, x_comp: int, y_comp: int,  x=0, y=0,):
@@ -19,7 +30,7 @@ class Vector(object):
         if x_comp == 0:
             self.theta = pi/2
         elif y_comp == 0:
-            self.theta = =
+            self.theta = 0
         elif x_comp >= 0 and y_comp >= 0:
             self.theta = math.atan(y_comp/x_comp)
         elif x_comp < 0 and y_comp < 0:
@@ -34,7 +45,8 @@ class Vector(object):
             [(self.x, self.y), self.x_comp, self.y_comp])
         
     def __str__(self):
-        return str(self)
+        return str(
+            [(self.x, self.y), self.x_comp, self.y_comp])
         
     def __add__(self,v2):
         return Vector(
@@ -61,18 +73,10 @@ class Vector(object):
             return True
         return False 
 
-    def plot(self,plot=plt, c="b"):
+    def plot(self,plot, c="b"):
+        '''
+        Takes 2 kwargs plot, c
+        plot: instance of matplotlib.pyplot module or subplot class 
+        c: Takes name of any named color of matplotlib module as type str()
+        '''
         plot.quiver([self.x], [self.y], self.x_comp, self.y_comp, color=[c], scale=Vector.scale)
-
-
-v1 = Vector(10,10)
-v2 = Vector(15,15)
-
-v1.plot()
-v2.plot()
-
-v2 -= v1
-v2.plot(c="g")
-
-
-plt.show()
